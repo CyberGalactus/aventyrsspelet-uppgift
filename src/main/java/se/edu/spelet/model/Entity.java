@@ -23,15 +23,15 @@ public class Entity {
         return damage;
     }
 
-    void punch(Entity toPunch) {
+    public void punch(Entity toPunch) {
         toPunch.takeHit(this.damage);
     }
 
-    void takeHit(int damage) {
+    public void takeHit(int damage) {
         this.health -= damage;
     }
 
-    boolean isConscious() {
+    public boolean isConscious() {
         return this.health > 0;
     }
 }
