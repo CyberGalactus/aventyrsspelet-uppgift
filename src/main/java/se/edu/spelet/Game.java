@@ -13,8 +13,8 @@ public class Game {
     private boolean firstTimeInKitchen = true;
 
     public Game(){
-        burglar = new Burglar("Burglar", 10, 5);
-        resident = new Resident("Resident", 9, 3);
+        burglar = new Burglar("Burglar", 10, 4);
+        resident = new Resident("Resident", 10, 3);
 
         livingRoom = new Room("Vardagsrummet", "The central living room where you start.");
         Room kitchen = new Room("Köket", "The kitchen with a delicious smell.");
@@ -106,11 +106,12 @@ public class Game {
         if (nextRoom != null) {
             currentRoom = nextRoom;
             showCurrentRoom();
-//            kitchenEvents();
             if (currentRoom.getName().equals("Köket")) {
                 kitchenEvents();
             } else if (currentRoom.getName().equals("Hall")) {
                 hallEvents();
+            } else if (currentRoom.getName().equals("Kontoret")) {
+                officeEvents();
             }
         } else {
             System.out.println("Du kan inte gå åt det hållet.");
@@ -173,13 +174,31 @@ public class Game {
             }
         }
 
-        if (resident.isConscious()) {
+        if (resident.isConscious() && !burglar.isConscious()) {
             System.out.println("Du besegrade inbrottstjuven!");
-        } else {
+        } else if (!resident.isConscious()) {
             System.out.println("Du blev besegrad av inbrottstjuven. Spelet är slut.");
             System.exit(0);
         }
     }
+
+
+    private void officeEvents() {
+        if (burglar.isKnockedOut()) {
+            System.out.println("Tjuven är knockad. Vill du ringa polisen? (ja/nej)");
+            Scanner scanner = new Scanner(System.in);
+            String response = scanner.nextLine();
+            if (response.equalsIgnoreCase("ja")) {
+                System.out.println("Du ringer polisen. Spelet är över och du är säker.");
+                System.exit(0);
+            } else {
+                System.out.println("Du väljer att inte ringa polisen just nu.");
+            }
+        } else {
+            System.out.println("Du är i kontoret. Det verkar som om tjuven fortfarande är där ute.");
+        }
+    }
+
 
 }
 

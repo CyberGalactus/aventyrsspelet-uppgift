@@ -34,4 +34,8 @@ public class Entity {
     public boolean isConscious() {
         return this.health > 0;
     }
+
+    public boolean isKnockedOut() {
+        return this.health <= 0;
+    }
 }

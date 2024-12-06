@@ -7,7 +7,7 @@ public class Resident extends Entity {
     }
 
     public void setDamage(int damage) {
-        this.damage -= damage; // förut var det -=
+        this.damage += damage; // förut var det -=
 
     }
 
